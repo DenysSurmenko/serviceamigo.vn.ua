@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Відгуки - Сервіс Amigo</title>
+    <style>
+        /* Загальні стилі */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            color: #fff;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        /* Анімація появи */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Фонове зображення */
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('photos/photo4.jpg.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        /* Затемнення фону */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Затемнення */
+            z-index: 0;
+        }
+
+        /* Навігація */
+        nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            background: #000;
+            padding: 2px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards;
+        }
+
+        .nav-container {
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 80px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: #fff;
+            font-size: 1.2rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ff6347;
+        }
+
+
+        /* Секція з відгуками */
+        .reviews-section {
+            padding: 150px 20px;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+            animation-delay: 0.5s;
+        }
+
+       /* Стилі для заголовка "Відгуки наших клієнтів" */
+.reviews-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    text-align: center;
+    color: #fff; /* Змінено на білий колір */
+}
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .review {
+            background: rgba(42, 42, 42, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.05);
+            text-align: left;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .review:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .review h2 {
+            font-size: 1.5rem;
+            color: #ff6347;
+            margin-bottom: 10px;
+        }
+
+        .review p {
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .review .stars {
+            color: gold;
+            margin-bottom: 10px;
+        }
+
+        .review .date {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        /* Адаптація для мобільних пристроїв */
+        @media (max-width: 768px) {
+            .reviews-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+
+            .reviews-section h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Кнопка "Повернутися на головну" */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #ff6347;
+            color: white;
+            font-size: 30px;
+            text-align: center;
+            line-height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            z-index: 101;
+            text-decoration: none;
+            animation: fadeIn 2s forwards;
+            animation-delay: 2.5s;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: #e5533a;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Фонове зображення -->
+<div class="background-image"></div>
+<div class="overlay"></div> <!-- Затемнення фону -->
+
+<!-- Навігаційне меню -->
+<nav>
+    <div class="nav-container">
+        <img src="logo.png.png" alt="Логотип" class="logo">
+        <ul>
+            <li><a href="index.html">Головна</a></li>
+            <li><a href="reviews.html">Відгуки</a></li>
+            <li><a href="volunteer.html">Волонтерська допомога</a></li>
+            <li><a href="contact.html">Контакти</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Секція з відгуками -->
+<section class="reviews-section">
+    <h1>Відгуки наших клієнтів</h1>
+    <div class="reviews-grid">
+        <div class="review">
+            <h2>Тетяна Бондаренко</h2>
+            <div class="stars">★★★★★</div>
+            <p>"Ніколи не думала, що ремонт авто може бути таким комфортним! Ввічливі працівники, зручний графік та…"</p>
+            <p class="date">22 жовт. 2024 р.</p>
+        </div>
+        <div class="review">
+            <h2>Олександр</h2>
+            <div class="stars">★★★★★</div>
+            <p>"Швидко, якісно, професійно. Дуже задоволений сервісом!"</p>
+            <p class="date">10 лист. 2024 р.</p>
+        </div>
+        <div class="review">
+            <h2>Марія Коваленко</h2>
+            <div class="stars">★★★★★</div>
+            <p>"Справжні професіонали! Дякую за відмінний сервіс."</p>
+            <p class="date">5 груд. 2024 р.</p>
+        </div>
+        <div class="review">
+            <h2>Василь Петренко</h2>
+            <div class="stars">★★★★☆</div>
+            <p>"Все добре, і розташування сервісу досить хороше."</p>
+            <p class="date">20 січ. 2025 р.</p>
+        </div>
+        <div class="review">
+            <h2>Дмитро</h2>
+            <div class="stars">★★★★★</div>
+            <p>"Чудове обслуговування, завжди на зв'язку і готові допомогти."</p>
+            <p class="date">15 лют. 2025 р.</p>
+        </div>
+        <div class="review">
+            <h2>Дмитро Олійник</h2>
+            <div class="stars">★★★★★</div>
+            <p>"Вражений якістю роботи та підходом до клієнта!"</p>
+            <p class="date">18 бер. 2025 р.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Кнопка "Повернутися на головну" -->
+<a href="#" class="back-to-top">☝</a>
+
+</body>
+</html>
+
+

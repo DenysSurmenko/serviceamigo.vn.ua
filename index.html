@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="styles.css">
+    <title>Сервіс Amigo</title>
+    <style>
+        /* Загальні стилі */
+        body {
+            overflow-x: hidden; /* Запобігання горизонтальному прокручуванню */
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            color: #fff;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        /* Анімація появи */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Контейнер для відео */
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Затемнення відео */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Затемнення */
+            z-index: 0;
+        }
+
+        /* Навігація */
+        nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            background: #000;
+            padding: 2px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards;
+        }
+
+        .nav-container {
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 80px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: #fff;
+            font-size: 1.2rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ff6347;
+        }
+
+        /* Кнопка для відкриття/закриття меню на мобільних пристроях */
+        .menu-toggle {
+            display: none; /* Сховати за замовчуванням */
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 101;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: #fff;
+            margin: 4px 0;
+            transition: 0.4s;
+        }
+
+@media (max-width: 768px) {
+    body {
+        font-size: 30%; /* Зменшення розміру шрифту на 30% */
+        overflow-x: hidden; 
+        margin: 0;
+        padding: 0;
+        position: relative; 
+    }
+
+    .menu-toggle {
+        display: flex; 
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: transform 0.3s ease; 
+        font-size: 0.8rem; /* Зменшений розмір шрифту */
+    }
+
+    nav ul {
+        visibility: hidden; 
+        height: 0; 
+        overflow: hidden; 
+        flex-direction: column;
+        position: absolute;
+        top: 50px;
+        right: 0;
+        background: #ff6347;
+        width: 100%;
+        text-align: center;
+        opacity: 0; 
+        transform: translateY(-10px); 
+        transition: visibility 0s 0.5s, opacity 0.5s ease, height 0.5s ease, transform 0.5s ease; 
+    }
+
+    nav ul.active {
+        visibility: visible; 
+        height: auto; 
+        opacity: 1; 
+        transform: translateY(0); 
+        transition: opacity 0.5s ease, height 0.5s ease, transform 0.5s ease; 
+    }
+
+    nav ul li {
+        margin: 6px 0; 
+        text-align: center; 
+    }
+
+    .header-content h1 {
+        font-size: 0.9rem; /* Зменшений розмір заголовка */
+        text-align: center; 
+    }
+
+    .cta-button, .contact-button {
+        font-size: 0.8rem; /* Зменшений розмір шрифту */
+        padding: 6px 12px; 
+        display: block; 
+        margin: 0 auto; 
+    }
+
+    .services-block h2 {
+        font-size: 0.8rem; /* Зменшений розмір заголовка */
+        text-align: center; 
+        margin-bottom: 6px; 
+    }
+
+    .photo-row {
+        display: flex;
+        flex-direction: column; 
+        gap: 6px; 
+    }
+
+    .photo {
+        width: 100%; 
+        height: auto; 
+    }
+
+    .caption-bold {
+        font-size: 0.7rem; /* Зменшений розмір шрифту */
+        text-align: center; 
+    }
+
+    .info-box {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 1fr);
+        left: 0; 
+        width: 100%; 
+    }
+
+    .inner-box {
+        width: 100%;
+        height: auto; 
+    }
+
+    /* Стилі для відео на фоні */
+    .background-video {
+        position: relative;
+        width: 100%;
+        height: 40vh; /* Зменшена висота для мобільних пристроїв */
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .background-video video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: auto; /* Автоматична висота для збереження пропорцій */
+        object-fit: cover; /* Забезпечує коректне масштабування відео */
+        transform: translate(-50%, -50%);
+        z-index: -1; /* Відео на задньому плані */
+    }
+
+    .background-video .content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        color: white;
+    }
+
+    .background-video h2 {
+        font-size: 1rem; /* Зменшений розмір заголовка */
+    }
+
+    .background-video .description {
+        font-size: 0.8rem; /* Зменшений розмір опису */
+    }
+}
+
+
+
+        
+        /* Головний екран */
+        header {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            height: 100vh;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        .header-content h1 {
+            font-size: 4rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+            animation-delay: 0.5s;
+        }
+
+        /* Кнопка дзвінка */
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            background: #ff6347;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            text-decoration: none;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+            animation-delay: 1s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            background: #e5533a;
+        }
+
+        /* Блок "Наші послуги" */
+        .services-block {
+            position: relative;
+            z-index: 1;
+            padding: 80px 20px;
+            text-align: center;
+            background: #000;
+            margin-top: 3vh;
+            min-height: 60vh;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+            animation-delay: 1.5s;
+        }
+
+        .services-block h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        /* Стилі для рядка з фото */
+        .photo-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 100px; /* Відступ між фото */
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Стилі для кожного фото та тексту */
+        .photo-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Стилі для фото */
+        .photo {
+            width: 110%;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .photo:hover {
+            transform: scale(1.05);
+            box-shadow: inset 0 0 120px rgba(0, 0, 0, 1.3);
+        }
+
+        /* Стилі для тексту під фото */
+        .caption-bold {
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-align: center;
+            color: #fff;
+            margin-top: 10px;
+        }
+
+        /* Новий блок з фоном без затемнення */
+        .background-photo {
+            width: 100%;
+            height: 95vh;
+            background-image: url('photos/photo3.jpg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding-left: 60px;
+            color: #fff;
+            text-align: left;
+            position: relative;
+        }
+
+        .background-photo h2 {
+            font-size: 2.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            margin-top: -550px;
+        }
+
+        /* Стилі для основної рамки */
+        .info-box {
+            background-color: transparent;
+            border: 1px solid #ff6347;
+            padding: 0; /* Прибираємо внутрішній відступ зовнішньої рамки */
+            margin-top: -60px;
+            width: 100%;
+            max-width: 900px;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            position: absolute;
+            left: 60px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 0; /* Прибираємо відступи між елементами */
+        }
+
+        /* Стилі для внутрішніх рамок */
+        .inner-box {
+            border: 1px solid #ff6347;
+            padding: 10px; /* Залишаємо внутрішній відступ для тексту */
+            background-color: rgba(0, 0, 0, 0.0);
+            position: relative;
+            width: 95.5%;
+            height: 150px;
+            margin: 0; /* Прибираємо зовнішній відступ */
+            display: flex;
+            align-items: center; /* Вирівнюємо текст по центру вертикально */
+            justify-content: center; /* Вирівнюємо текст по центру горизонтально */
+        }
+
+        .inner-box p {
+            margin: 0; /* Прибираємо відступи у тексту */
+            padding: 0; /* Прибираємо внутрішні відступи */
+            color: #fff;
+            text-align: center; /* Вирівнюємо текст по центру */
+        }
+
+        /* Кнопка під основною рамкою */
+        .contact-button {
+            display: inline-block;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            background: #ff6347;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            text-decoration: none;
+            margin-top: 20px; /* Відступ від рамки */
+            position: absolute;
+            left: 60px;
+            top: calc(100% - 200px); /* Переміщаємо кнопку на 400px вгору */
+            transform: translateY(20px); /* Регулює відстань вниз */
+        }
+
+        .contact-button:hover {
+            transform: translateY(-5px);
+            background: #e5533a;
+        }
+
+        /* Кнопка "Повернутися на головну" */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #ff6347;
+            color: white;
+            font-size: 30px;
+            text-align: center;
+            line-height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            z-index: 101;
+            text-decoration: none;
+            animation: fadeIn 2s forwards;
+            animation-delay: 2.5s;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: #e5533a;
+        }
+
+        /* Стилі для нового блоку з відео */
+        .background-video {
+            width: 100%;
+            height: 90vh;
+            position: relative;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding-left: 60px;
+            color: #fff;
+            text-align: left;
+            overflow: hidden; /* Щоб уникнути виходу відео за межі */
+        }
+
+        .background-video .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1; /* Відео за текстом */
+        }
+
+        .background-video .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Щоб відео заповнювало контейнер */
+        }
+
+        .background-video .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Затемнення */
+            z-index: 0; /* Затемнення поверх відео */
+        }
+
+        /* Стилі для заголовка "Малярні роботи" */
+        .background-video h2 {
+            font-size: 2.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            z-index: 1;
+            position: relative;
+            margin-top: -180px; /* Відступ від верхньої частини екрану або попереднього елементу */
+            text-align: left; /* Вирівнюємо текст по лівому краю */
+            padding-left: 60px; /* Відступ зліва */
+        }
+
+        .background-video h2::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #ff6347; /* Колір лінії */
+            margin-top: 10px; /* Відступ між заголовком і лінією */
+        }
+
+        /* Текст під лінією */
+        .background-video .description {
+            font-size: 1.8rem;
+            color: #fff;
+            text-align: left;
+            margin-top: 80px; /* Зміщуємо текст на 50px вниз */
+            margin-left: -462.5px; /* Зміщуємо текст на 400px вліво */
+            max-width: 800px;
+            line-height: 1.6;
+            z-index: 1;
+            position: relative;
+            padding-left: 60px; /* Відступ зліва */
+        }
+
+        .background-video .info-box {
+            z-index: 1; /* Текст поверх затемнення */
+            position: relative; /* Щоб текст був видимим */
+        }
+
+        .background-video .contact-button {
+            z-index: 1; /* Кнопка поверх затемнення */
+            position: relative; /* Щоб кнопка була видимою */
+        }
+
+        /* Стилі для чорної смуги з контактами */
+        .contact-stripe {
+            width: 100%;
+            background-color: #000;
+            padding: 30px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+            position: relative;
+        }
+
+        .contact-container {
+            width: 90%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container img {
+            height: 50px;
+        }
+
+        .contact-info {
+            text-align: right;
+            color: #fff;
+            font-size: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .contact-info p {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="video-container">
+    <video autoplay loop muted>
+        <source src="videos/vid.mp4.mp4" type="video/mp4">
+    </video>
+</div>
+
+<div class="overlay"></div> <!-- Затемнення відео -->
+
+<!-- Кнопка для відкриття/закриття меню на мобільних пристроях -->
+<div class="menu-toggle" id="mobile-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<div class="overlay"></div> <!-- Затемнення відео -->
+
+<!-- Навігаційне меню -->
+<nav>
+    <div class="nav-container">
+        <img src="logo.png.png" alt="Логотип" class="logo">
+        <ul>
+            <li><a href="reviews.html">Відгуки</a></li>
+            <li><a href="volunteer.html">Волонтерська допомога</a></li>
+            <li><a href="#contact">Контакти</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header>
+    <div class="header-content">
+        <h1>Автосервіс Amigo</h1>
+        <a href="tel:+380989583305" class="cta-button">Зателефонувати</a>
+    </div>
+</header>
+
+<!-- Блок "Наші послуги" -->
+<section class="services-block">
+    <h2>Наші послуги:</h2>
+
+    <!-- Блок з фото -->
+    <section class="photo-gallery">
+        <div class="photo-row">
+            <div class="photo-item">
+                <div class="photo" style="background-image: url('photos/photo1.jpg.jpg');"></div>
+                <div class="caption-bold">Малярні роботи</div>
+            </div>
+            <div class="photo-item">
+                <div class="photo" style="background-image: url('photos/photo2.jpg.jpg');"></div>
+                <div class="caption-bold">Ремонт кузовних деталей</div>
+            </div>
+        </div>
+    </section>
+</section>
+
+<!-- Новий блок з фоном без затемнення -->
+<section class="background-photo">
+    <h2>Ремонт кузова автомобіля</h2>
+
+    <!-- Текст з рамками -->
+    <div class="info-box">
+        <div class="inner-box">
+            <p>Терміни і якість виконуваних робіт, забезпечуються наявністю повного спектру сучасного обладнання</p>
+        </div>
+        <div class="inner-box">
+            <p>Ми пропонуємо тільки якісний кузовний ремонт авто.</p>
+        </div>
+        <div class="inner-box">
+            <p>Відновлення геометрії кузова авто</p>
+        </div>
+        <div class="inner-box">
+            <p>На завершення робіт проводиться ретельний контроль по всіх швах і зазорам.</p>
+        </div>
+    </div>
+
+    <!-- Кнопка для переходу до контактів -->
+    <a href="#contact" class="contact-button">Контакти</a>
+</section>
+
+<!-- Новий блок з фоном відео -->
+<section class="background-video">
+    <div class="video-container">
+        <video autoplay loop muted playsinline>
+            <source src="videos/vid2.mp4.mp4" type="video/mp4">
+            Ваш браузер не підтримує відео.
+        </video>
+    </div>
+    <div class="overlay"></div> <!-- Затемнення відео -->
+
+    <h2>Малярні роботи</h2>
+
+    <!-- Текст під лінією -->
+    <div class="description">
+        Ми готові надати весь спектр послуг, пов’язаних з фарбуванням автомобіля. Починаючи з локальної фарбування автомобіля і фарбування окремих елементів кузова до повної фарбування і полірування автомобіля.
+    </div>
+
+    <!-- Кнопка для переходу до контактів -->
+    <a href="#contact" class="contact-button">Контакти</a>
+</section>
+
+<!-- Чорна смуга з контактами та логотипом -->
+<section class="contact-stripe">
+    <div class="contact-container">
+        <div class="logo-container">
+            <img src="logo.png.png" alt="Логотип" class="logo">
+        </div>
+        <div class="contact-info">
+            <p>serviceamigo@gmail.com</p>
+            <p>вулиця Гонти, 33а, Вінниця, Вінницька область, Україна, 21000</p>
+            <p>Тел: +38 098 958 33 05</p>
+        </div>
+    </div>
+</section>
+    
+<a href="#" class="back-to-top">☝</a>
+    
+  <script>
+       const menuToggle = document.querySelector('.menu-toggle');
+const navMenu = document.querySelector('nav ul');
+
+menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
+    </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Додаємо клас dark-mode до body
+        document.body.classList.add('dark-mode');
+    });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
