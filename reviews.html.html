@@ -125,40 +125,40 @@
     }
 
     .review {
-        background: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
-        padding: 30px;
-        border-radius: 15px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        text-align: left;
-        position: relative;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+            background: transparent;
+            padding: 30px;
+            border-radius: 0;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            position: relative;
+            backdrop-filter: blur(3px);
+        }
 
-    .review:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-    }
+        .review h2 {
+            color: #fff;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            position: relative;
+        }
 
-    .review h2 {
-        font-size: 1.7rem;
-        color: #ff6347;
-        margin-bottom: 10px;
-        font-weight: 600;
-    }
+        .review h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #ff6347;
+        }
 
-    .review p {
-        font-size: 1.2rem;
-        margin: 0;
-        line-height: 1.5;
-    }
-
-    .review .stars {
-        color: gold;
-        margin-bottom: 10px;
-        font-size: 1.3rem;
-    }
-
+        .review .stars {
+            color: gold;
+            margin: 15px 0;
+            font-size: 1.4rem;
+        }
+        
     .review .date {
         font-size: 1rem;
         color: #aaa;
