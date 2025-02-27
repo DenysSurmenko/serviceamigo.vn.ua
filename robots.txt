@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /*.jpg$
+Allow: /*.png$
