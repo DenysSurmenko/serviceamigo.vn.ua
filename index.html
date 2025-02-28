@@ -133,10 +133,16 @@
 /* Оптимізація стилів для мобільних пристроїв (max-width: 768px) */
 @media (max-width: 768px) {
     body {
-        font-size: 14px; /* Покращений розмір шрифту для читабельності */
+        font-size: 14px;
         overflow-x: hidden;
         margin: 0;
         padding: 0;
+        word-wrap: break-word;
+    }
+
+    * {
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
     .menu-toggle {
@@ -158,6 +164,7 @@
         width: 100%;
         text-align: center;
         padding: 10px 0;
+        overflow: hidden;
     }
 
     nav ul.active {
@@ -173,6 +180,7 @@
     .header-content h1 {
         font-size: 1.2rem;
         text-align: center;
+        padding: 0 10px;
     }
 
     .cta-button, .contact-button {
@@ -186,12 +194,14 @@
         font-size: 1rem;
         text-align: center;
         margin-bottom: 8px;
+        padding: 0 10px;
     }
 
     .photo-row {
         display: flex;
         flex-direction: column;
         gap: 8px;
+        padding: 0 10px;
     }
 
     .photo {
@@ -202,6 +212,7 @@
     .caption-bold {
         font-size: 0.85rem;
         text-align: center;
+        padding: 0 10px;
     }
 
     .info-box {
@@ -220,11 +231,12 @@
     /* Оптимізація відео на фоні */
     .background-video {
         width: 100%;
-        height: 25vh; /* Оптимальна висота для мобільних пристроїв */
+        height: 25vh;
         overflow: hidden;
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 0 10px;
     }
 
     .background-video video {
@@ -238,17 +250,21 @@
         z-index: 1;
         text-align: center;
         color: white;
-        padding: 5px;
+        padding: 10px;
+        word-wrap: break-word;
     }
 
     .background-video h2 {
         font-size: 1rem;
+        padding: 0 10px;
     }
 
     .background-video .description {
         font-size: 0.8rem;
+        padding: 0 10px;
     }
 }
+
 
         
         /* Головний екран */
