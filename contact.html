@@ -3,35 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Контакти</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Сервіс Amigo</title>
+    <style>
+        /* Існуючі стилі */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            color: #fff;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('photos/contact-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 0;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            background: #000;
+            padding: 2px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards;
+        }
+
+        .volunteer-section {
+            padding: 150px 20px;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+            animation-delay: 0.5s;
+        }
+
+        /* НОВІ СТИЛІ ДЛЯ КОНТАКТІВ */
+        .contact-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            flex: 1;
+            padding: 40px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info {
+            flex: 1;
+            padding: 40px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .info-item {
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 1.1rem;
+        }
+
+        .info-item i {
+            font-size: 1.8rem;
+            color: #ff6347;
+        }
+
+        @media (max-width: 768px) {
+            .contact-content {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            .contact-form,
+            .contact-info {
+                width: 100%;
+                padding: 25px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Контакти</h1>
-    </header>
-    <main>
-        <section class="contact-info">
-            <h2>Зв'яжіться з нами</h2>
-            <p>Email: <a href="mailto:serviceamigo@gmail.com">serviceamigo@gmail.com</a></p>
-            <p>Телефон: <a href="tel:+380989583305">+38 098 958 33 05</a></p>
-            <p>Адреса: вулиця Гонти, 33а, Вінниця, Вінницька область, Україна, 21000</p>
-        </section>
-        <section class="contact-form">
-            <h2>Напишіть нам</h2>
-            <form>
-                <label for="name">Ім'я:</label>
-                <input type="text" id="name" name="name" required>
-                
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-                
-                <label for="message">Повідомлення:</label>
-                <textarea id="message" name="message" rows="5" required></textarea>
-                
-                <button type="submit">Надіслати</button>
+
+<div class="background-image"></div>
+<div class="overlay"></div>
+
+<nav>
+    <div class="nav-container">
+        <img src="logo.png" alt="Логотип" class="logo">
+        <ul>
+            <li><a href="index.html">Головна</a></li>
+            <li><a href="reviews.html">Відгуки</a></li>
+            <li><a href="volunteer.html">Волонтерська допомога</a></li>
+            <li><a href="contact.html">Контакти</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="volunteer-section">
+    <h1>Зв'яжіться з нами</h1>
+    <div class="contact-content">
+        <div class="contact-form">
+            <form id="contactForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Ваше ім'я" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Ваш email" required>
+                </div>
+                <div class="form-group">
+                    <textarea rows="6" placeholder="Ваше повідомлення..." required></textarea>
+                </div>
+                <button type="submit" class="cta-button">Відправити</button>
             </form>
-        </section>
-    </main>
+        </div>
+
+        <div class="contact-info">
+            <div class="info-item">
+                <i>📍</i>
+                <div>
+                    <h3>Адреса</h3>
+                    <p>м. Київ, вул. Героїв Дніпра 12</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <i>📞</i>
+                <div>
+                    <h3>Телефон</h3>
+                    <p><a href="tel:+380441234567">+38 (044) 123-45-67</a></p>
+                </div>
+            </div>
+            <div class="info-item">
+                <i>✉️</i>
+                <div>
+                    <h3>Email</h3>
+                    <p><a href="mailto:info@amigo.ua">info@amigo.ua</a></p>
+                </div>
+            </div>
+            <div class="info-item">
+                <i>⏰</i>
+                <div>
+                    <h3>Графік роботи</h3>
+                    <p>Пн-Нд: 08:00 - 20:00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Обробник форми
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Дякуємо! Ваше повідомлення успішно відправлено.');
+        this.reset();
+    });
+
+    // Анімація кнопки "Нагору"
+    window.addEventListener('scroll', function() {
+        const backButton = document.querySelector('.back-to-top');
+        backButton.style.opacity = window.scrollY > 300 ? '1' : '0';
+    });
+</script>
+
 </body>
 </html>
