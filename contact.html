@@ -10,11 +10,13 @@
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
-            padding: 0;
+            padding: 0 0 200px;
             background-color: #1a1a1a;
             color: #fff;
             opacity: 0;
             animation: fadeIn 1s forwards;
+            min-height: 100vh;
+            position: relative;
         }
 
         @keyframes fadeIn {
@@ -22,7 +24,7 @@
             100% { opacity: 1; }
         }
 
-        /* Фон та затемнення */
+        /* Фон */
         .background-image {
             position: fixed;
             top: 0;
@@ -32,7 +34,7 @@
             background-image: url('photos/photo4.jpg');
             background-size: cover;
             background-position: center;
-            z-index: -1;
+            z-index: -2;
         }
 
         .overlay {
@@ -42,10 +44,10 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.6);
-            z-index: 0;
+            z-index: -1;
         }
 
-         /* Навігація */
+        /* Навігація */
         nav {
             position: fixed;
             top: 0;
@@ -56,7 +58,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 100;
+            z-index: 1000;
             opacity: 0;
             animation: fadeIn 1.5s forwards;
         }
@@ -96,7 +98,7 @@
             color: #ff6347;
         }
 
-        /* Основний контент */
+        /* Основна секція */
         .volunteer-section {
             padding: 120px 20px 60px;
             max-width: 1200px;
@@ -109,7 +111,7 @@
             font-size: 2.5rem;
         }
 
-        /* Форма та контакти */
+        /* Форма */
         .contact-content {
             display: flex;
             gap: 30px;
@@ -145,7 +147,7 @@
             border-color: #ff6347;
         }
 
-        /* Інформаційні блоки */
+        /* Інформація */
         .info-item {
             margin-bottom: 30px;
             display: flex;
@@ -159,7 +161,7 @@
             text-align: center;
         }
 
-        /* Кнопки */
+        /* Кнопка */
         .cta-button {
             display: inline-block;
             padding: 18px 45px;
@@ -182,43 +184,34 @@
             box-shadow: 0 12px 25px rgba(255, 99, 71, 0.4);
         }
 
-         <style>
-        /* ДОДАНО НОВІ СТИЛІ ДЛЯ КОНТАКТНОЇ СМУГИ */
+        /* Футер */
         .contact-stripe {
-            background: #000;
-            padding: 30px 0;
-            margin-top: 80px;
-            position: relative;
-            z-index: 50;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px 0;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transform: translateY(100%);
+            animation: slideUp 0.5s ease forwards;
         }
 
         .contact-container {
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             padding: 0 20px;
         }
 
-        .logo-container img {
-            height: 60px;
-            filter: brightness(0) invert(1);
+        @keyframes slideUp {
+            to { transform: translateY(0); }
         }
 
-        .contact-stripe .contact-info {
-            text-align: right;
-            color: #fff;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .contact-stripe .contact-info p {
-            margin: 5px 0;
-        }
-    </style>
-
-        /* Адаптація */
+        /* Адаптивність */
         @media (max-width: 768px) {
             nav ul {
                 gap: 15px;
@@ -238,112 +231,129 @@
             .volunteer-section {
                 padding-top: 140px;
             }
-        }
 
+            body {
+                padding-bottom: 280px;
+            }
+
+            .contact-container {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .logo {
+                height: 50px;
+            }
+        }
     </style>
 </head>
 <body>
+  
+  <!-- Фон -->
+  <div class="background-image"></div>
+  <div class="overlay"></div>
 
-<!-- Чорна смуга з контактами та логотипом -->
-<section class="contact-stripe">
-    <div class="contact-container">
-        <div class="logo-container">
-            <img src="logo.png.png" alt="Логотип" class="logo">
-        </div>
-        <div class="contact-info">
-            <p>serviceamigo@gmail.com</p>
-            <p>вулиця Гонти, 33а, Вінниця, Вінницька область, Україна, 21000</p>
-            <p>Тел: +38 098 958 33 05</p>
-        </div>
-    </div>
-</section>
-    
-<div class="background-image"></div>
-<div class="overlay"></div>
+  <!-- Навігація -->
+  <nav>
+      <div class="nav-container">
+          <img src="logo.png.png" alt="Логотип" class="logo">
+          <ul>
+              <li><a href="index.html">Головна</a></li>
+              <li><a href="reviews.html">Відгуки</a></li>
+              <li><a href="volunteer.html">Волонтерська допомога</a></li>
+              <li><a href="contact.html">Контакти</a></li>
+          </ul>
+      </div>
+  </nav>
 
-<nav>
-    <div class="nav-container">
-        <img src="logo.png.png" alt="Логотип" class="logo">
-        <ul>
-            <li><a href="index.html">Головна</a></li>
-            <li><a href="reviews.html">Відгуки</a></li>
-            <li><a href="volunteer.html">Волонтерська допомога</a></li>
-            <li><a href="contact.html">Контакти</a></li>
-        </ul>
-    </div>
-</nav>
+  <!-- Основний контент -->
+  <section class="volunteer-section">
+      <h1>Зв'яжіться з нами</h1>
+      <div class="contact-content">
+          <div class="contact-form">
+              <form id="contactForm">
+                  <div class="form-group">
+                      <input type="text" placeholder="Ваше ім'я" required>
+                  </div>
+                  <div class="form-group">
+                      <input type="email" placeholder="Ваш email" required>
+                  </div>
+                  <div class="form-group">
+                      <textarea rows="6" placeholder="Ваше повідомлення..." required></textarea>
+                  </div>
+                  <button type="submit" class="cta-button">Відправити</button>
+              </form>
+          </div>
 
-<section class="volunteer-section">
-    <h1>Зв'яжіться з нами</h1>
-    <div class="contact-content">
-        <div class="contact-form">
-            <form id="contactForm">
-                <div class="form-group">
-                    <input type="text" placeholder="Ваше ім'я" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" placeholder="Ваш email" required>
-                </div>
-                <div class="form-group">
-                    <textarea rows="6" placeholder="Ваше повідомлення..." required></textarea>
-                </div>
-                <button type="submit" class="cta-button">Відправити</button>
-            </form>
-        </div>
+          <div class="contact-info">
+              <div class="info-item">
+                  <i>📍</i>
+                  <div>
+                      <h3>Адреса</h3>
+                      <p>м. Київ, вул. Героїв Дніпра 12</p>
+                  </div>
+              </div>
+              <div class="info-item">
+                  <i>📞</i>
+                  <div>
+                      <h3>Телефон</h3>
+                      <p><a href="tel:+380441234567">+38 (044) 123-45-67</a></p>
+                  </div>
+              </div>
+              <div class="info-item">
+                  <i>✉️</i>
+                  <div>
+                      <h3>Email</h3>
+                      <p><a href="mailto:info@amigo.ua">info@amigo.ua</a></p>
+                  </div>
+              </div>
+              <div class="info-item">
+                  <i>⏰</i>
+                  <div>
+                      <h3>Графік роботи</h3>
+                      <p>Пн-Нд: 08:00 - 20:00</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
 
-        <div class="contact-info">
-            <div class="info-item">
-                <i>📍</i>
-                <div>
-                    <h3>Адреса</h3>
-                    <p>м. Київ, вул. Героїв Дніпра 12</p>
-                </div>
-            </div>
-            <div class="info-item">
-                <i>📞</i>
-                <div>
-                    <h3>Телефон</h3>
-                    <p><a href="tel:+380441234567">+38 (044) 123-45-67</a></p>
-                </div>
-            </div>
-            <div class="info-item">
-                <i>✉️</i>
-                <div>
-                    <h3>Email</h3>
-                    <p><a href="mailto:info@amigo.ua">info@amigo.ua</a></p>
-                </div>
-            </div>
-            <div class="info-item">
-                <i>⏰</i>
-                <div>
-                    <h3>Графік роботи</h3>
-                    <p>Пн-Нд: 08:00 - 20:00</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+  <!-- Футер -->
+  <section class="contact-stripe">
+      <div class="contact-container">
+          <div class="logo-container">
+              <img src="logo.png.png" alt="Логотип" class="logo">
+          </div>
+          <div class="contact-info">
+              <p>serviceamigo@gmail.com</p>
+              <p>вулиця Гонти, 33а, Вінниця, Вінницька область, Україна, 21000</p>
+              <p>Тел: +38 098 958 33 05</p>
+          </div>
+      </div>
+  </section>
 
-<script>
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const button = this.querySelector('button');
-        button.classList.add('loading');
-        
-        setTimeout(() => {
-            alert('Дякуємо! Ваше повідомлення успішно відправлено.');
-            this.reset();
-            button.classList.remove('loading');
-        }, 1500);
-    });
+  <!-- Скрипти -->
+  <script>
+      document.getElementById('contactForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          const button = this.querySelector('button');
+          button.classList.add('loading');
+          
+          setTimeout(() => {
+              alert('Дякуємо! Ваше повідомлення успішно відправлено.');
+              this.reset();
+              button.classList.remove('loading');
+          }, 1500);
+      });
 
-    window.addEventListener('scroll', function() {
-        const backButton = document.querySelector('.back-to-top');
-        if (backButton) {
-            backButton.style.opacity = window.scrollY > 300 ? '1' : '0';
-        }
-    });
-</script>
+      window.addEventListener('scroll', function() {
+          const backButton = document.querySelector('.back-to-top');
+          if (backButton) {
+              backButton.style.opacity = window.scrollY > 300 ? '1' : '0';
+          }
+      });
+  </script>
 
 </body>
 </html>
