@@ -95,6 +95,39 @@ nav ul li a {
 nav ul li a:hover {
     color: #ff6347;
 }
+                }
+
+        /* Кнопка "Повернутися на головну" */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #ff6347;
+            color: white;
+            font-size: 30px;
+            text-align: center;
+            line-height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            z-index: 101;
+            text-decoration: none;
+            animation: fadeIn 2s forwards;
+            animation-delay: 2.5s;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: #e5533a;
+        }
 
         /* НОВІ СТИЛІ ДЛЯ КОНТАКТІВ */
         .contact-content {
