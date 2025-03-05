@@ -310,26 +310,27 @@
             animation-delay: 0.5s;
         }
 
-        /* Кнопка дзвінка */
+        /* Кнопка */
         .cta-button {
             display: inline-block;
-            padding: 15px 40px;
-            font-size: 1.5rem;
-            background: #ff6347;
+            padding: 18px 45px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ff6347 0%, #e5533a 100%);
             color: white;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            text-decoration: none;
-            opacity: 0;
-            animation: fadeIn 2s forwards;
-            animation-delay: 1s;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            margin-top: 25px;
+            box-shadow: 0 8px 20px rgba(255, 99, 71, 0.3);
+            position: relative;
+            overflow: hidden;
         }
 
         .cta-button:hover {
-            transform: translateY(-5px);
-            background: #e5533a;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 25px rgba(255, 99, 71, 0.4);
         }
 
         /* Блок "Наші послуги" */
@@ -459,26 +460,28 @@
 
         /* Кнопка під основною рамкою */
         .contact-button {
-            display: inline-block;
+                display: inline-block;
             padding: 15px 40px;
             font-size: 1.5rem;
-            background: #ff6347;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ff6347 0%, #e5533a 100%);
             color: white;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            text-decoration: none;
-            margin-top: 20px; /* Відступ від рамки */
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            margin-top: 20px;
+            box-shadow: 0 8px 20px rgba(255, 99, 71, 0.3);
             position: absolute;
+            overflow: hidden;
             left: 60px;
             top: calc(100% - 200px); /* Переміщаємо кнопку на 400px вгору */
             transform: translateY(20px); /* Регулює відстань вниз */
         }
 
         .contact-button:hover {
-            transform: translateY(-5px);
-            background: #e5533a;
+           transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 25px rgba(255, 99, 71, 0.4);
         }
 
         /* Кнопка "Повернутися на головну" */
