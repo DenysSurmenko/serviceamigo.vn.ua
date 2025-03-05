@@ -2,18 +2,21 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-    <title>Волонтерська допомога - Сервіс Amigo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сервіс Amigo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* Base styles */
+        /* Загальні стилі */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
-            padding: 0;
+            padding: 0 0 200px;
             background-color: #1a1a1a;
             color: #fff;
             opacity: 0;
             animation: fadeIn 1s forwards;
+            min-height: 100vh;
+            position: relative;
         }
 
         @keyframes fadeIn {
@@ -21,16 +24,17 @@
             100% { opacity: 1; }
         }
 
+        /* Фон */
         .background-image {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('photos/photo4.jpg.jpg');
+            background-image: url('photos/photo4.jpg');
             background-size: cover;
             background-position: center;
-            z-index: -1;
+            z-index: -2;
         }
 
         .overlay {
@@ -40,10 +44,10 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.6);
-            z-index: 0;
+            z-index: -1;
         }
 
-        /* Navigation */
+        /* Навігація */
         nav {
             position: fixed;
             top: 0;
@@ -54,7 +58,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 100;
+            z-index: 1000;
             opacity: 0;
             animation: fadeIn 1.5s forwards;
         }
@@ -68,7 +72,6 @@
 
         .logo {
             height: 80px;
-            transition: transform 0.3s ease;
         }
 
         nav ul {
@@ -77,7 +80,10 @@
             margin: 0;
             display: flex;
             gap: 25px;
-            transition: transform 0.3s ease;
+        }
+
+        nav ul li {
+            display: inline;
         }
 
         nav ul li a {
@@ -92,448 +98,262 @@
             color: #ff6347;
         }
 
-       /* Основні стилі */
-.burger-menu {
-  display: none;
-  cursor: pointer;
-  padding: 15px;
-  z-index: 1001;
-}
-
-.bar1, .bar2, .bar3 {
-  width: 35px;
-  height: 3px;
-  background: #fff;
-  margin: 6px 0;
-  transition: 0.4s;
-}
-
-.mobile-menu-overlay {
-  position: fixed;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.95);
-  z-index: 999;
-  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  padding-top: 80px;
-}
-
-.mobile-menu {
-  list-style: none;
-  padding: 0 25px;
-}
-
-.mobile-menu li {
-  margin: 25px 0;
-}
-
-.mobile-menu a {
-  color: #fff;
-  font-size: 1.5rem;
-  text-decoration: none;
-  padding: 15px;
-  display: block;
-  border-radius: 8px;
-  transition: background 0.3s;
-}
-
-/* Анімації */
-.change .bar1 {
-  transform: rotate(-45deg) translate(-6px, 6px);
-}
-
-.change .bar2 {
-  opacity: 0;
-}
-
-.change .bar3 {
-  transform: rotate(45deg) translate(-6px, -6px);
-}
-
-        /* Volunteer Section */
+        /* Основна секція */
         .volunteer-section {
-            padding: 150px 20px;
-            position: relative;
-            z-index: 1;
-            opacity: 0;
-            animation: fadeIn 2s forwards;
-            animation-delay: 0.5s;
+            padding: 120px 20px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .volunteer-section h1 {
-            font-size: 2.5rem;
-            margin-bottom: 80px;
-            text-transform: uppercase;
+        h1 {
             text-align: center;
-            color: #fff;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
         }
 
-        .volunteer-content {
+        /* Форма */
+        .contact-content {
             display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 20px;
+            gap: 30px;
+            flex-wrap: wrap;
         }
 
-        .left-border-box {
-            border-left: 5px solid #ff6347;
-            padding-left: 20px;
-            margin-bottom: 30px;
-            width: 50%;
+        .contact-form, .contact-info {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
         }
 
-        .left-border-box p {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
+        .form-group {
+            margin-bottom: 25px;
         }
 
-        /* Carousel */
-        .carousel {
-            position: relative;
-            width: 40%;
-            max-width: 500px;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            aspect-ratio: 1 / 1;
-        }
-
-        .carousel-inner {
-            display: flex;
-            transition: transform 0.5s ease;
-            height: 100%;
-        }
-
-        .carousel-item {
-            min-width: 100%;
-            box-sizing: border-box;
-            aspect-ratio: 1 / 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .carousel-item img {
+        input, textarea {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
-            will-change: transform;
-            backface-visibility: hidden;
+            padding: 12px 15px;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
-        .carousel-control {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            font-size: 1.5rem;
-            border-radius: 50%;
-            transition: background-color 0.3s ease;
-            width: 40px;
-            height: 40px;
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #ff6347;
+        }
+
+        /* Інформація */
+        .info-item {
+            margin-bottom: 30px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            touch-action: manipulation;
-            min-width: 44px;
-            min-height: 44px;
+            gap: 15px;
         }
 
-        .carousel-control:hover {
-            background-color: rgba(0, 0, 0, 0.8);
+        .info-item i {
+            font-size: 1.8rem;
+            min-width: 40px;
+            text-align: center;
         }
 
-        /* Mobile Adaptations */
-        @media (max-width: 768px) {
-            .volunteer-section {
-                padding: 80px 15px !important;
-            }
-
-            .volunteer-section h1 {
-                font-size: 2rem !important;
-                margin-bottom: 40px !important;
-            }
-
-            .volunteer-content {
-                flex-direction: column;
-                gap: 30px !important;
-            }
-
-            .left-border-box {
-                width: 100% !important;
-                padding-left: 15px !important;
-                border-left-width: 3px !important;
-            }
-
-            .left-border-box p {
-                font-size: 1rem !important;
-                line-height: 1.5;
-            }
-
-            .carousel {
-                width: 100% !important;
-                max-width: none !important;
-                aspect-ratio: unset !important;
-                margin-top: 20px !important;
-            }
-
-            .carousel-item {
-                aspect-ratio: 16/9 !important;
-            }
-
-            .cta-button {
-                width: 100% !important;
-                padding: 15px 20px !important;
-                font-size: 1.1rem !important;
-            }
-
-            nav ul {
-                display: none;
-                position: fixed;
-                top: 70px;
-                right: 20px;
-                background: rgba(0,0,0,0.9);
-                flex-direction: column;
-                padding: 20px;
-                border-radius: 10px;
-                width: 200px;
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
-
-            .logo {
-                height: 50px !important;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .volunteer-section h1 {
-                font-size: 1.8rem !important;
-            }
-
-            .carousel-control {
-                width: 35px !important;
-                height: 35px !important;
-                font-size: 1.2rem !important;
-            }
-
-            .back-to-top {
-                bottom: 20px;
-                right: 20px;
-                width: 40px;
-                height: 40px;
-                font-size: 24px;
-                line-height: 40px;
-            }
-        }
-
+        /* Кнопка */
         .cta-button {
             display: inline-block;
-            padding: 15px 40px;
+            padding: 18px 45px;
             font-size: 1.2rem;
-            background: #ff6347;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ff6347 0%, #e5533a 100%);
             color: white;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            text-decoration: none;
-            margin-top: 20px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            margin-top: 25px;
+            box-shadow: 0 8px 20px rgba(255, 99, 71, 0.3);
+            position: relative;
+            overflow: hidden;
         }
 
-        .back-to-top {
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 25px rgba(255, 99, 71, 0.4);
+        }
+
+        /* Футер */
+        .contact-stripe {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: #ff6347;
-            color: white;
-            font-size: 30px;
-            text-align: center;
-            line-height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            z-index: 101;
-            text-decoration: none;
-            animation: fadeIn 2s forwards;
-            animation-delay: 2.5s;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px 0;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transform: translateY(100%);
+            animation: slideUp 0.5s ease forwards;
         }
 
-        /* Стилі для сенсорних пристроїв */
-@media (hover: none) and (pointer: coarse) {
-  .mobile-menu a {
-      min-height: 60px;
-      display: flex;
-      align-items: center;
-  }
-  
-  .burger-menu {
-      padding: 20px;
-  }
-}
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        @keyframes slideUp {
+            to { transform: translateY(0); }
+        }
+
+        /* Адаптивність */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .logo {
+                height: 60px;
+            }
+            
+            .volunteer-section {
+                padding-top: 140px;
+            }
+
+            body {
+                padding-bottom: 280px;
+            }
+
+            .contact-container {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .logo {
+                height: 50px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="background-image"></div>
-    <div class="overlay"></div>
-
-    <nav>
-        <div class="nav-container">
-            <img src="logo.png.png" alt="Логотип" class="logo">
-            <div class="menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul>
-                <li><a href="index.html">Головна</a></li>
-                <li><a href="reviews.html">Відгуки</a></li>
-                <li><a href="volunteer.html">Волонтерська допомога</a></li>
-                <li><a href="contact.html">Контакти</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <section class="volunteer-section">
-        <h1>Волонтерська допомога</h1>
-        <div class="volunteer-content">
-            <div class="left-border-box">
-                <p>Наш автосервіс підтримує ЗСУ!</p>
-                <p>Наш автосервіс активно займається волонтерством для Збройних Сил України. Ми розуміємо важливість підтримки наших захисників і робимо все можливе, щоб допомогти їм у цій нелегкій справі.</p>
-                <a href="tel:+380989583305" class="cta-button">Зателефонувати</a>
-            </div>
-
-            <div class="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item"><img src="photos/photo5.jpg.jpg" alt="Фото 5" loading="lazy"></div>
-                    <div class="carousel-item"><img src="photos/photo6.jpg.jpg" alt="Фото 6" loading="lazy"></div>
-                    <div class="carousel-item"><img src="photos/photo7.jpg.jpg" alt="Фото 7" loading="lazy"></div>
-                    <div class="carousel-item"><img src="photos/photo8.jpg.jpg" alt="Фото 8" loading="lazy"></div>
-                    <div class="carousel-item"><img src="photos/photo9.jpg.jpg" alt="Фото 9" loading="lazy"></div>
-                    <div class="carousel-item"><img src="photos/photo10.jpg.jpg" alt="Фото 10" loading="lazy"></div>
-                </div>
-                <button class="carousel-control prev">&#10094;</button>
-                <button class="carousel-control next">&#10095;</button>
-            </div>
-        </div>
-    </section>
-
-    <a href="#" class="back-to-top">☝</a>
-
-    <script>
-        // Carousel Logic
-        let currentIndex = 0;
-        const carouselInner = document.querySelector('.carousel-inner');
-        const items = document.querySelectorAll('.carousel-item');
-        const totalItems = items.length;
-
-        function updateCarousel() {
-            carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
-        }
-
-        document.querySelector('.carousel-control.next').addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % totalItems;
-            updateCarousel();
-        });
-
-        document.querySelector('.carousel-control.prev').addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-            updateCarousel();
-        });
-
-        // Mobile Menu
-       const burger = document.querySelector('.burger-menu');
-const overlay = document.querySelector('.mobile-menu-overlay');
-let isOpen = false;
-
-// Обробник сенсорних подій
-burger.addEventListener('touchstart', function(e) {
-  e.preventDefault();
-  toggleMenu();
-});
-
-document.addEventListener('touchstart', function(e) {
-  if(isOpen && !overlay.contains(e.target) && !burger.contains(e.target)) {
-      toggleMenu();
-  }
-});
-
-function toggleMenu() {
-  isOpen = !isOpen;
-  burger.classList.toggle('change');
-  overlay.classList.toggle('active');
   
-  // Блокування скролу
-  document.body.style.overflow = isOpen ? 'hidden' : 'auto';
-  
-  // Анімація для iOS
-  if(isOpen) {
-      overlay.style.transition = 'left 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
-  }
-        });
+  <!-- Фон -->
+  <div class="background-image"></div>
+  <div class="overlay"></div>
 
-        // Swipe Handling
-        let touchStartX = 0;
-        const carousel = document.querySelector('.carousel');
-        
-        carousel.addEventListener('touchstart', e => {
-            touchStartX = e.touches[0].clientX;
-        });
+  <!-- Навігація -->
+  <nav>
+      <div class="nav-container">
+          <img src="logo.png.png" alt="Логотип" class="logo">
+          <ul>
+              <li><a href="index.html">Головна</a></li>
+              <li><a href="reviews.html">Відгуки</a></li>
+              <li><a href="volunteer.html">Волонтерська допомога</a></li>
+              <li><a href="contact.html">Контакти</a></li>
+          </ul>
+      </div>
+  </nav>
 
-        carousel.addEventListener('touchend', e => {
-            const touchEndX = e.changedTouches[0].clientX;
-            const diff = touchStartX - touchEndX;
-            
-            if (Math.abs(diff) > 30) {
-                if (diff > 0) {
-                    currentIndex = (currentIndex + 1) % totalItems;
-                } else {
-                    currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-                }
-                updateCarousel();
-            }
-        });
+  <!-- Основний контент -->
+  <section class="volunteer-section">
+      <h1>Зв'яжіться з нами</h1>
+      <div class="contact-content">
+          <div class="contact-form">
+              <form id="contactForm">
+                  <div class="form-group">
+                      <input type="text" placeholder="Ваше ім'я" required>
+                  </div>
+                  <div class="form-group">
+                      <input type="email" placeholder="Ваш email" required>
+                  </div>
+                  <div class="form-group">
+                      <textarea rows="6" placeholder="Ваше повідомлення..." required></textarea>
+                  </div>
+                  <button type="submit" class="cta-button">Відправити</button>
+              </form>
+          </div>
 
-        // Auto-rotate
-        let carouselInterval = setInterval(() => {
-            currentIndex = (currentIndex + 1) % totalItems;
-            updateCarousel();
-        }, 5000);
+          <div class="contact-info">
+              <div class="info-item">
+                  <i>📍</i>
+                  <div>
+                      <h3>Адреса</h3>
+                      <p>вулиця Гонти, 33а, Вінниця, Вінницька область, Україна, 21000</p>
+                  </div>
+              </div>
+              <div class="info-item">
+                  <i>📞</i>
+                  <div>
+                      <h3>Телефон</h3>
+                      <p><a href="tel:+38 098 958 33 05">+38 (098) 958-33-05</a></p>
+                  </div>
+              </div>
+              <div class="info-item">
+                  <i>✉️</i>
+                  <div>
+                      <h3>Email</h3>
+                      <p><a href="mailto:serviceamigo@gmail.com">serviceamigo@gmail.com</a></p>
+                  </div>
+              </div>
+              <div class="info-item">
+                  <i>⏰</i>
+                  <div>
+                      <h3>Графік роботи</h3>
+                      <p>Пн-Пт: 08:00 - 20:00</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
 
-        carousel.addEventListener('mouseenter', () => clearInterval(carouselInterval));
-        carousel.addEventListener('mouseleave', () => {
-            carouselInterval = setInterval(() => {
-                currentIndex = (currentIndex + 1) % totalItems;
-                updateCarousel();
-            }, 5000);
-        });
+  <!-- Футер -->
+  <section class="contact-stripe">
+      <div class="contact-container">
+          <div class="logo-container">
+              <img src="logo.png.png" alt="Логотип" class="logo">
+          </div>
+          <div class="contact-info">
+              <p>serviceamigo@gmail.com</p>
+              <p>вулиця Гонти, 33а, Вінниця, Вінницька область, Україна, 21000</p>
+              <p>Тел: +38 098 958 33 05</p>
+          </div>
+      </div>
+  </section>
 
-        // Back to Top Button
-        window.addEventListener('scroll', () => {
-            const backButton = document.querySelector('.back-to-top');
-            if (window.scrollY > 300) {
-                backButton.style.opacity = '1';
-                backButton.style.transform = 'translateY(0)';
-            } else {
-                backButton.style.opacity = '0';
-                backButton.style.transform = 'translateY(20px)';
-            }
-        });
-    </script>
+  <!-- Скрипти -->
+  <script>
+      document.getElementById('contactForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          const button = this.querySelector('button');
+          button.classList.add('loading');
+          
+          setTimeout(() => {
+              alert('Дякуємо! Ваше повідомлення успішно відправлено.');
+              this.reset();
+              button.classList.remove('loading');
+          }, 1500);
+      });
+
+      window.addEventListener('scroll', function() {
+          const backButton = document.querySelector('.back-to-top');
+          if (backButton) {
+              backButton.style.opacity = window.scrollY > 300 ? '1' : '0';
+          }
+      });
+  </script>
+
 </body>
 </html>
